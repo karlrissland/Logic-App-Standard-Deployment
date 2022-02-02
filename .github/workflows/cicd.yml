@@ -29,11 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     environment:
-      name: dev
+      name: LogicAppTestDeploy
     env:
       NAME: dev
       LA_NAME: mysamplelogicapp-dev
-      RG: logicapp-dev
+      RG: lgdeploy
       LOCATION: eastus
     steps:
     - name: Checkout
@@ -100,9 +100,9 @@ jobs:
     environment:
       name: prd
     env:
-      NAME: prd
+      NAME: LogicAppTestDeploy
       LA_NAME: mysamplelogicapp-prd
-      RG: logicapp-prd
+      RG: lgdeploy
       LOCATION: eastus
     steps:
     - name: Checkout
