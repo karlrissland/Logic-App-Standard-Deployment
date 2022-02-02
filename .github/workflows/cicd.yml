@@ -32,7 +32,7 @@ jobs:
       name: LogicAppTestDeploy
     env:
       NAME: dev
-      LA_NAME: mysamplelogicapp-dev
+      LA_NAME: krisslgdeploytest-dev
       RG: lgdeploy
       LOCATION: eastus
     steps:
@@ -101,7 +101,7 @@ jobs:
       name: prd
     env:
       NAME: LogicAppTestDeploy
-      LA_NAME: mysamplelogicapp-prd
+      LA_NAME: krisslgdeploytest-prd
       RG: lgdeploy
       LOCATION: eastus
     steps:
