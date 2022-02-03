@@ -10,7 +10,44 @@
                     "headers": {
                         "Content-Type": "text/plain"
                     },
-                    "body": "Hi @{triggerBody()?['name']}, current time is @{utcNow()}"
+                    "body": "Hi , current time is @{utcNow()}"
+                },
+                "runAfter": {
+                    "Uploads_a_Blob_to_Azure_Storage": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Uploads_a_Blob_to_Azure_Storage": {
+                "type": "ServiceProvider",
+                "inputs": {
+                    "parameters": {
+                        "containerName": "somefiles",
+                        "blobName": "@utcNow()",
+                        "content": "@variables('body')"
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "AzureBlob",
+                        "operationId": "uploadBlob",
+                        "serviceProviderId": "/serviceProviders/AzureBlob"
+                    }
+                },
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Initialize_variable": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "body",
+                            "type": "string",
+                            "value": "@{triggerBody()}"
+                        }
+                    ]
                 },
                 "runAfter": {}
             }
@@ -19,16 +56,7 @@
             "manual": {
                 "type": "Request",
                 "kind": "Http",
-                "inputs": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
+                "inputs": {}
             }
         },
         "contentVersion": "1.0.0.0",

@@ -1,3 +1,4 @@
 {
-    "azureLogicAppsStandard.projectSubpath": "/src/LogicAppsStandardDemo"
+    "azureLogicAppsStandard.projectSubpath": "/src/LogicAppsStandardDemo",
+    "azureFunctions.projectSubpath": "src\\LogicAppsStandardDemo"
 }
