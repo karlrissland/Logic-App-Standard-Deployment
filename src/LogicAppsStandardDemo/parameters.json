@@ -1,0 +1,6 @@
+{
+  "TestParam": {
+    "type": "String",
+    "value": "\"StupidString\""
+  }
+}
