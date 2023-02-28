@@ -1,0 +1,16 @@
+{
+    "folders":[
+        {
+            "path": ".",
+            "name": "root"
+        },
+        {
+            "path":"src/LogicAppsStandardDemo",
+            "name":"LogicAppDemo"
+        },
+        {
+            "path":"src/infrastructure",
+            "name":"Infrastructure as Code"
+        }
+    ]
+}
