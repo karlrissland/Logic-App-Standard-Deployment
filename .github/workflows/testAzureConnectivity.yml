@@ -1,4 +1,4 @@
-name: Run Azure Login with OpenID Connect and PowerShell
+name: Test Azure Login
 on: 
   workflow_dispatch:
     inputs:

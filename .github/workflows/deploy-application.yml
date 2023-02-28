@@ -1,4 +1,4 @@
-name: Build Logic App
+name: Build and deploy application
 
 on:
   workflow_dispatch:

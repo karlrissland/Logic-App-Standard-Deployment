@@ -1,4 +1,4 @@
-name: Build Logic App
+name: Build Logic App - Legacy
 
 on: 
   workflow_dispatch:
