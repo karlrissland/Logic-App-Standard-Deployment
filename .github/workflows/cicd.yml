@@ -1,12 +1,19 @@
 name: Build Logic App
 
-on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+  
+#  push:
+#    branches:
+#      - main
+#    paths-ignore:
+#      - 'docs/**'
+#      - 'README.md'
 
 jobs:
   build:
