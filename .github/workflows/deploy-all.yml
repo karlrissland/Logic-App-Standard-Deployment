@@ -15,3 +15,8 @@ permissions:
 
 jobs:
   build:
+    name: xyz
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
