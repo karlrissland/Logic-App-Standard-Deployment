@@ -1,1 +1,9 @@
 name: Deploy Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log Level'
+        required: true
+        default: 'warning'
