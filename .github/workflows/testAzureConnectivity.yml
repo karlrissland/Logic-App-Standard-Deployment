@@ -1,5 +1,11 @@
 name: Run Azure Login with OpenID Connect and PowerShell
-on: [push]
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
 
 permissions:
       id-token: write
