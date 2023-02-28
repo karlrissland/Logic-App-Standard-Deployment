@@ -12,5 +12,16 @@
             "path":"src/infrastructure",
             "name":"Infrastructure as Code"
         }
-    ]
+    ],
+    "settings":{
+
+    },
+    "launch": {
+        "name":"Attach to LogicApp Demo",
+        "version": "0.2.0",
+        "configurations": [
+            
+        ],
+        "compounds": []
+    }
 }
