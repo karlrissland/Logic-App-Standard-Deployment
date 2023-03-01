@@ -30,17 +30,6 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-   # - name: 'deploy bicep template'
-   #   uses: Azure/arm-deploy@1.0.9
-   #   id: deploy
-   #   with:
-   #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-   #     template: ./src/infrastructure/main.bicep
-   #     parameters: 'environment=dev location=eastus'   # Can also specify a parameters file location.  Wiwll want to have both of these driven from environment variables
-   #     deploymentMode: Incremental
-   #     deploymentName: lgdemodeployment
-   #     failOnStdErr: false
-
     - name: Deploy Azure Resource Manager (ARM) Template
       uses: Azure/arm-deploy@v1.0.9
       with:
@@ -55,7 +44,8 @@ jobs:
 
 
     #Will need to update environment variables with this info
-    - run: echo ${{ steps.deploy.outputs.LogicAppPlan_name }}
-    - run: echo ${{ steps.deploy.outputs.LogicApp_name}}
-    - run: echo ${{ steps.deploy.outputs.LogicApp_Storage_name }}
-    - run: echo ${{ steps.deploy.outputs.ResourceGroupName }}
+    - run: |
+        echo "LogicAppPlan_name: ${{ steps.deploy.outputs.LogicAppPlan_name }}"
+        echo "LogicApp_name: ${{ steps.deploy.outputs.LogicApp_name}}"
+        echo "LogicApp_Storage_name: ${{ steps.deploy.outputs.LogicApp_Storage_name }}"
+        echo "ResourceGroupName: ${{ steps.deploy.outputs.ResourceGroupName }}"
