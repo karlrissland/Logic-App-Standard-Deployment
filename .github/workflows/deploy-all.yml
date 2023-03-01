@@ -15,3 +15,4 @@ permissions:
 jobs:
   call-app-deployment-workflow-in-local-repo:
     uses: ./.github/workflows/deploy-application.yml
+    secrets: inherit
