@@ -8,7 +8,7 @@ on:
         required: true
         default: 'warning'
 
-    workflow_call:
+  workflow_call:
 
 permissions:
       id-token: write
@@ -31,7 +31,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: 'deploy bicep template'
-      uses: azure/arm-deploy@1.0.9
+      uses: Azure/arm-deploy@1.0.9
       id: deploy
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
