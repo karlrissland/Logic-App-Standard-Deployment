@@ -45,6 +45,13 @@ jobs:
           name: workflow
           path: ./output/
 
+      - name: 'update logicapp settings'
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: logicappdeploymentdemo
+          app-settings-json: '[{"name":"testappsetting","value":"testappsettingvalue","slotSetting":"false"}]'
+          connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"other", "slotSetting":"false"}]'
+
       - name: 'Deploy LogicApp with Functions Action'
         uses: Azure/functions-action@v1
         id: la
