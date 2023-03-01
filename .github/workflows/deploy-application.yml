@@ -50,7 +50,8 @@ jobs:
         with:
           app-name: logicappdeploymentdemo
           app-settings-json: '[{"name":"testappsetting","value":"testappsettingvalue","slotSetting":"false"}]'
-          connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"other", "slotSetting":"false"}]'
+          connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"Custom", "slotSetting":"false"}]'
+          #Note: can also use general-settings-json to manage workflow and general settings
 
       - name: 'Deploy LogicApp with Functions Action'
         uses: Azure/functions-action@v1
