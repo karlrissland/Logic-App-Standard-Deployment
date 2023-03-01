@@ -51,6 +51,7 @@ jobs:
         deploymentName: lgdemodeployment               # pickup the changeset id for the deployment name
         region: eastus                                 # Want this driven from an environment variable
         parameters: 'environment=dev location=eastus'  # Can also specify a parameters file location.  Want these driven from environment variables
+        failOnStdErr: false
 
 
     #Will need to update environment variables with this info
