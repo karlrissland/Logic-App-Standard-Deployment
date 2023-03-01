@@ -13,6 +13,10 @@ permissions:
       contents: read
 
 jobs:
+  call-infra-deployment-workflow-in-local-repo:
+    uses: ./.github/workflows/deploy-infrastructure.yml
+    secrets: inherit
+    
   call-app-deployment-workflow-in-local-repo:
     uses: ./.github/workflows/deploy-application.yml
     secrets: inherit

@@ -13,7 +13,8 @@
             "name":"Infrastructure as Code"
         }
     ],
-    "settings":{
+    "settings": {
+        "powershell.cwd": "c:\\Source\\Logic-App-Standard-Deployment\\src\\infrastructure"
 
     },
     "launch": {
