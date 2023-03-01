@@ -12,11 +12,6 @@ permissions:
       id-token: write
       contents: read
 
-
 jobs:
-  build:
-    name: xyz
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+  call-app-deployment-workflow-in-local-repo:
+    uses: ./.github/workflows/deploy-application.yml
