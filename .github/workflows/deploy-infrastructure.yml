@@ -14,7 +14,6 @@ permissions:
       id-token: write
       contents: read
 
-
 jobs:
   deployInfra:
     name: 'deploy infrastructure'
@@ -43,10 +42,16 @@ jobs:
         parameters: 'environment=dev location=eastus'  # Can also specify a parameters file location.  Want these driven from environment variables
         failOnStdErr: false
 
-
     #Will need to update environment variables with this info
     - run: |
         echo "LogicAppPlan_name: ${{ steps.deploy.outputs.LogicAppPlan_name }}"
         echo "LogicApp_name: ${{ steps.deploy.outputs.LogicApp_name}}"
         echo "LogicApp_Storage_name: ${{ steps.deploy.outputs.LogicApp_Storage_name }}"
         echo "ResourceGroupName: ${{ steps.deploy.outputs.ResourceGroupName }}"
+
+    #Update variables with outputs, these will be used by the app deployment script.
+    #this approach is cumbersome, couldn't find another way to update a variable... suggestions welcome
+    - run: |
+        gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
+        gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
+        gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPP_NAME -f name='LOGICAPP_NAME' -f value=${{ steps.deploy.outputs.LogicApp_name}}
