@@ -18,11 +18,11 @@ jobs:
     name: Build LogicApp Demo
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: 'Checkout'
       uses: actions/checkout@v1
     - name: Package
       run: (cd src/LogicAppsStandardDemo; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
-    - name: Upload Package
+    - name: 'Upload Package'
       uses: actions/upload-artifact@v2
       with:
         name: workflow
@@ -39,8 +39,16 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: get deployment package
+      - name: 'get deployment package'
         uses: actions/download-artifact@master
         with:
           name: workflow
           path: ./output/
+
+      - name: 'Deploy LogicApp with Functions Action'
+        uses: Azure/functions-action@v1
+        id: la
+        with:
+          app-name: logicappdeploymentdemo
+          package: ./output/workflow.zip
+
