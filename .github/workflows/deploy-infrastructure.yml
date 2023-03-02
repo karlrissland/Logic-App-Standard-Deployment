@@ -3,16 +3,17 @@ name: Deploy Infrastructure
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log Level'
-        required: true
-        default: 'warning'
       environment:
+        type: environment
         description: 'environment to run on'
         required: true
         default: 'development'
 
   workflow_call:
+    inputs:
+      environment:
+        type: environment
+        default: 'development'
 
 permissions:
       id-token: write
@@ -38,6 +39,7 @@ jobs:
         echo "parameters: environment=${{vars.WORKLOAD_ENVIRONMENT}} location=${{vars.AZURE_REGION}}"
         echo "github refs: ${{GITHUB.REF}}.${{GITHUB.SHA}}  "
         echo "region: ${{vars.AZURE_REGION}} "
+        echo "environment is: ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
 
     - name: Deploy Azure Resource Manager (ARM) Template
       uses: Azure/arm-deploy@v1.0.9
