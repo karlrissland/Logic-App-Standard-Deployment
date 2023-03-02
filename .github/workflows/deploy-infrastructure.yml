@@ -37,7 +37,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         template: ./src/infrastructure/main.bicep
         deploymentMode: Incremental
-        deploymentName: ${{git_branch}}.${{git_hash}}            # pickup the commit id for the deployment name
+        deploymentName: ${{GITHUB.REF}}.${{GITHUB.SHA}}            # pickup the commit id for the deployment name
         region: ${{vars.AZURE_REGION}}                                 # Want this driven from an environment variable
         parameters: 'environment=${{vars.WORKLOAD_ENVIRONMENT}} location=${{vars.AZURE_REGION}}'  # Can also specify a parameters file location.  Want these driven from environment variables
         failOnStdErr: false
