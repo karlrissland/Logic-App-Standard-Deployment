@@ -23,6 +23,8 @@ param location string = resourceGroup().location
 
 param workloadName string = 'schemaGen'
 
+param managementbaseuri string = 'https://management.azure.com'
+
 var LogicAppPlan_name = '${workloadName}-WorkflowPlan-${uniqueSuffix}-${deploymentEnvironment}'
 var LogicApp_Name = '${workloadName}-${uniqueSuffix}-${deploymentEnvironment}'
 var LogicApp_Storage_Name = substring(replace(toLower('${workloadName}lgstor${uniqueSuffix}${deploymentEnvironment}'),'-',''),0,24)
@@ -167,7 +169,7 @@ resource sites_schemagen_name_resource 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'WORKFLOWS_MANAGEMENT_BASE_URI'
-          value: 'https://management.azure.com'
+          value: managementbaseuri
         }
       ]
     }
