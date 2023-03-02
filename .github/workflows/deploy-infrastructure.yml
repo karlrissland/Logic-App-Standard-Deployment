@@ -68,9 +68,20 @@ jobs:
     #Alternatives
     # - Read and write a parameter file to the repo
     # - Use Keyvault or Azure App Config
+    
+    #  This is how you update a repository level variable
+    #- run: |
+    #    gh api  /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
+    #    gh api  /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
+    #    gh api  /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPP_NAME -f name='LOGICAPP_NAME' -f value=${{ steps.deploy.outputs.LogicApp_name}}
+    #  env:
+    #    GH_TOKEN: ${{ secrets.GH_PAT }}  
+
+    # This is how you update an environment level variable
+    # Note: the number after repositories is the repository id.  You get this via "gh api /repos/karlrissland/logic-app-standard-deployment"
     - run: |
-        gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
-        gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
-        gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPP_NAME -f name='LOGICAPP_NAME' -f value=${{ steps.deploy.outputs.LogicApp_name}}
+        gh api --method PATCH  /repositories/454819664/environments/${{ inputs.environment }}/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
+        gh api --method PATCH  /repositories/454819664/environments/${{ inputs.environment }}/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
+        gh api --method PATCH  /repositories/454819664/environments/${{ inputs.environment }}/variables/LOGICAPP_NAME -f name='LOGICAPP_NAME' -f value=${{ steps.deploy.outputs.LogicApp_name}}
       env:
         GH_TOKEN: ${{ secrets.GH_PAT }}  
