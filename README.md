@@ -17,7 +17,7 @@ The following diagram describes the general architecture of Azure services depic
 The following diagram describes the structure of the repository.  Highlighting key files.
 
 ## Deployment
-The solution has GitHub workflows setup to deploy the infrastructure, application, or both.  There is also a PowerShell script available to deploy the infrastructure.
+The solution has GitHub workflows setup to deploy the infrastructure, application, or both.  There is also a PowerShell script available to deploy the infrastructure.  The diagram below shows the how the github workflows are being reused.
 
 ![CI/CD Architecture](docs/img/architecture-cicd.drawio.svg)
 
