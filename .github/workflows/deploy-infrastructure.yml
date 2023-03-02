@@ -12,7 +12,8 @@ on:
   workflow_call:
     inputs:
       environment:
-        default: 'development'
+        required: true
+        type: string
 
 permissions:
       id-token: write
