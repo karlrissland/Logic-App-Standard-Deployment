@@ -8,7 +8,7 @@ targetScope = 'subscription'
 ])
 param environment string
 
-param uniqueSuffix string = substring(uniqueString(subscription().id),0,5)
+param uniqueSuffix string = substring(uniqueString(concat(subscription().id),environment),0,5)
 
 param location string = deployment().location
 
