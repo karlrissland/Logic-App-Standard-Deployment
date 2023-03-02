@@ -12,7 +12,6 @@ on:
   workflow_call:
     inputs:
       environment:
-        type: environment
         default: 'development'
 
 permissions:
