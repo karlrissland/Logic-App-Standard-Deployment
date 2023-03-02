@@ -37,9 +37,9 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         template: ./src/infrastructure/main.bicep
         deploymentMode: Incremental
-        deploymentName: lgdemodeployment               # pickup the changeset id for the deployment name
-        region: eastus                                 # Want this driven from an environment variable
-        parameters: 'environment=dev location=eastus'  # Can also specify a parameters file location.  Want these driven from environment variables
+        deploymentName: ${git_branch}.${git_hash}            # pickup the commit id for the deployment name
+        region: ${{vars.AZURE_REGION}}                                 # Want this driven from an environment variable
+        parameters: 'environment=${{vars.WORKLOAD_ENVIRONMENT}} location=${{vars.AZURE_REGION}}'  # Can also specify a parameters file location.  Want these driven from environment variables
         failOnStdErr: false
 
     #Will need to update environment variables with this info
@@ -51,6 +51,11 @@ jobs:
 
     #Update variables with outputs, these will be used by the app deployment script.
     #this approach is cumbersome, couldn't find another way to update a variable... suggestions welcome
+    #NOTE: Had to create a PAT with the correct permissions to write a variable, this works but it will expire eventually and break the workflow
+    #      the error will mention that it can't do integration operations or something...basically a 403
+    #Alternatives
+    # - Read and write a parameter file to the repo
+    # - Use Keyvault or Azure App Config
     - run: |
         gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
         gh api --method PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/karlrissland/Logic-App-Standard-Deployment/actions/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
