@@ -3,10 +3,11 @@ name: Deploy infrastructure, build app, deploy app
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log Level'
+      environment:
+        type: environment
+        description: 'environment to run on'
         required: true
-        default: 'warning'
+        default: 'development'
 
 permissions:
       id-token: write
@@ -16,7 +17,7 @@ jobs:
   call-infra-deployment-workflow-in-local-repo:
     uses: ./.github/workflows/deploy-infrastructure.yml
     with:
-      environment: development
+      environment: ${{ inputs.environment }}
     secrets: inherit
     
   call-app-deployment-workflow-in-local-repo:
