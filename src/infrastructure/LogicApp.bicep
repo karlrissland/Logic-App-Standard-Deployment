@@ -23,7 +23,7 @@ param location string = resourceGroup().location
 
 param workloadName string = 'schemaGen'
 
-param managementbaseuri string = 'https://management.azure.com'
+param managementbaseuri string = environment().resourceManager
 
 var LogicAppPlan_name = '${workloadName}-WorkflowPlan-${uniqueSuffix}-${deploymentEnvironment}'
 var LogicApp_Name = '${workloadName}-${uniqueSuffix}-${deploymentEnvironment}'
