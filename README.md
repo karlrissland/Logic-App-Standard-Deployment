@@ -1,16 +1,25 @@
-# logic-apps-standard
+# Logic Apps Standard Deployment Examples
 
-Demonstrates how to automate the deployment of Logic Apps Standard into Azure
+Demonstrates how to automate the deployment of Logic Apps Standard into Azure.  Will cover common scenarios that need to be takend into consideration when deploying with GitHub actions
+
+- Parameterizing a workflow
+- Deploying across dev/test/production
+- Working with Schemas and Maps
+- Working with Azure Managed Connections
+- Setting up Custom Property Tracking
 
 ## Azure Architecture
 The following diagram describes the general architecture of Azure services depicted in this solution.
 
-![Azure Architecture](docs/img/architecture-azure.png)
+![Azure Architecture](docs/img/architecture-azure.drawio.svg)
 
-## GitHub Workflow
-The included workflow performs the following tasks:
+## Repository Structure
+The following diagram describes the structure of the repository.  Highlighting key files.
 
-![CI/CD Architecture](docs/img/architecture-cicd.png)
+## Deployment
+The solution has GitHub workflows setup to deploy the infrastructure, application, or both.  There is also a PowerShell script available to deploy the infrastructure.
+
+![CI/CD Architecture](docs/img/architecture-cicd.drawio.svg)
 
 - Build: package the Logic App Standard
 - Deploy to Azure logicapp-dev

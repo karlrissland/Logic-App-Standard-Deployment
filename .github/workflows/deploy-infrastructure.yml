@@ -7,6 +7,10 @@ on:
         description: 'Log Level'
         required: true
         default: 'warning'
+      environment:
+        description: 'environment to run on'
+        required: true
+        default: 'development'
 
   workflow_call:
 
@@ -18,6 +22,7 @@ jobs:
   deployInfra:
     name: 'deploy infrastructure'
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
     steps:
     - name: Checkout
       uses: actions/checkout@v1

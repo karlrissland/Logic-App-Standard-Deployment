@@ -12,7 +12,7 @@
 		},
 		{
 			"type": "func",
-			"command": "host start",
+			"command": "host start --port 7072",
 			"problemMatcher": "$func-watch",
 			"isBackground": true
 		}
