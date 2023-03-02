@@ -29,6 +29,11 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+    -run: |
+       echo "parameters: environment=${{vars.WORKLOAD_ENVIRONMENT}} location=${{vars.AZURE_REGION}}"
+       echo "github refs: ${{GITHUB.REF}}.${{GITHUB.SHA}}  "
+       echo "region: ${{vars.AZURE_REGION}} "
+
     - name: Deploy Azure Resource Manager (ARM) Template
       uses: Azure/arm-deploy@v1.0.9
       id: deploy
