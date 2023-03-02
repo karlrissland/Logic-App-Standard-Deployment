@@ -16,6 +16,8 @@ jobs:
   call-infra-deployment-workflow-in-local-repo:
     uses: ./.github/workflows/deploy-infrastructure.yml
     secrets: inherit
+    with:
+      failOnStdErr: false
     
   call-app-deployment-workflow-in-local-repo:
     needs: call-infra-deployment-workflow-in-local-repo       # need to have the infra deploy first and not deploy the app if there is an issue
