@@ -27,7 +27,10 @@ param managementbaseuri string = environment().resourceManager
 
 var LogicAppPlan_name = '${workloadName}-WorkflowPlan-${uniqueSuffix}-${deploymentEnvironment}'
 var LogicApp_Name = '${workloadName}-${uniqueSuffix}-${deploymentEnvironment}'
-var LogicApp_Storage_Name = substring(replace(toLower('${workloadName}lgstor${uniqueSuffix}${deploymentEnvironment}'),'-',''),0,24)
+var prelim_LogicAppStorageName = replace(toLower('${workloadName}lgstor${uniqueSuffix}${deploymentEnvironment}'),'-','')
+
+//substring will fail if the string isn't long enough, so need to test to see if needed
+var LogicApp_Storage_Name = (length(prelim_LogicAppStorageName)<24 ? prelim_LogicAppStorageName :substring(prelim_LogicAppStorageName,0,23))
 
 resource storageAccounts_WorkflowPlanStorage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: LogicApp_Storage_Name
