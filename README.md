@@ -8,6 +8,15 @@ Demonstrates how to automate the deployment of Logic Apps Standard into Azure.  
 - Working with Azure Managed Connections
 - Setting up Custom Property Tracking
 
+## Setup
+
+### Your GitHub Environment
+If you Fork the repo to use as a starting point for your own work, take a look at my [GitHub Setup Documentation](docs/SetupAuth.md).  This walks you through security and variable setup necessary for github workflows to run in your environment.
+
+### Your Development Environment
+
+High level steps and documentation links to help you get your development environment up and running.
+
 ## Azure Architecture
 The following diagram describes the general architecture of Azure services depicted in this solution.
 
@@ -38,3 +47,4 @@ Each of the Deployment stage will:
 - https://docs.microsoft.com/en-us/azure/developer/github/deploy-to-azure
 - https://docs.microsoft.com/en-us/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github
 - https://docs.microsoft.com/en-us/azure/templates/
+
