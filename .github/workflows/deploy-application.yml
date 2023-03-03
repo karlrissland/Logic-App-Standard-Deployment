@@ -9,16 +9,20 @@ on:
         default: 'warning'
         
   workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
 permissions:
       id-token: write
       contents: read
 
-
 jobs:
   build:
     name: Build LogicApp Demo
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
     steps:
     - name: 'Checkout'
       uses: actions/checkout@v1
@@ -46,6 +50,12 @@ jobs:
         with:
           name: workflow
           path: ./output/
+
+      - run: |
+          echo "Azure Region: ${{vars.AZURE_REGION}}"
+          echo "LogicApp Plan Name: ${{vars.LOGICAPPPLAN_NAME}}"
+          echo "LogicApp Name: ${{vars.LOGICAPP_NAME}} "
+          echo "Workload Environment: ${{vars.WORKLOAD_ENVIRONMENT}}"
 
       - name: 'update logicapp settings'
         uses: azure/appservice-settings@v1
