@@ -58,6 +58,13 @@ jobs:
           echo "LogicApp Name: ${{vars.LOGICAPP_NAME}} "
           echo "Workload Environment: ${{vars.WORKLOAD_ENVIRONMENT}}"
 
+      - name: 'Deploy LogicApp with Functions Action'
+        uses: Azure/functions-action@v1
+        id: la
+        with:
+          app-name: ${{ vars.LOGICAPP_NAME }}
+          package: ./output/workflow.zip
+          
       - name: 'update logicapp settings'
         uses: azure/appservice-settings@v1
         with:
@@ -66,10 +73,5 @@ jobs:
           connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"Custom", "slotSetting":"false"}]'
           #Note: can also use general-settings-json to manage workflow and general settings
 
-      - name: 'Deploy LogicApp with Functions Action'
-        uses: Azure/functions-action@v1
-        id: la
-        with:
-          app-name: ${{ vars.LOGICAPP_NAME }}
-          package: ./output/workflow.zip
+
 
