@@ -15,7 +15,7 @@ param location string = deployment().location
 // Variables
 var workloadName = 'la-std-basics'
 var resourceSuffix = '${workloadName}-${environment}'
-var ResourceGroupName = 'integration-demos-${resourceSuffix}-${uniqueSuffix}'
+var ResourceGroupName = 'integration-demos-${uniqueSuffix}-${resourceSuffix}'
 
 resource RG 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: ResourceGroupName
