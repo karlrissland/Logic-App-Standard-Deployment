@@ -23,7 +23,7 @@ Some Screenshots for you
 
 <a href="img/sc-AppRegistrationNewRegistration.png"><img src="img/sc-AppRegistrationNewRegistration.png" width="300"></a>
 
-<a href="img/sc-AppREgistrationFederatedCreds.png"><img src="img/sc-AppREgistrationFederatedCreds.png" width="300"></a>
+<a href="img/sc-AppRegistrationFederatedCreds.png"><img src="img/sc-AppRegistrationFederatedCreds.png" width="300"></a>
 
 <a href="img/sc-ServicePrincipleRbacAssignment.png"><img src="img/sc-ServicePrincipleRbacAssignment.png" width="300"></a>
 
