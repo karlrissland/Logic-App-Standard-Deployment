@@ -23,4 +23,6 @@ jobs:
   call-app-deployment-workflow-in-local-repo:
     needs: call-infra-deployment-workflow-in-local-repo       # need to have the infra deploy first and not deploy the app if there is an issue
     uses: ./.github/workflows/deploy-application.yml
+    with:
+      environment: ${{ inputs.environment }}
     secrets: inherit
