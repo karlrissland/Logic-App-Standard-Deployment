@@ -80,8 +80,8 @@ jobs:
     # This is how you update an environment level variable
     # Note: the number after repositories is the repository id.  You get this via "gh api /repos/karlrissland/logic-app-standard-deployment"
     - run: |
-        gh api --method PATCH  /repositories/454819664/environments/${{ inputs.environment }}/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
-        gh api --method PATCH  /repositories/454819664/environments/${{ inputs.environment }}/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
-        gh api --method PATCH  /repositories/454819664/environments/${{ inputs.environment }}/variables/LOGICAPP_NAME -f name='LOGICAPP_NAME' -f value=${{ steps.deploy.outputs.LogicApp_name}}
+        gh api --method PATCH  /repositories/${{vars.GH_REPO_ID}}/environments/${{ inputs.environment }}/variables/RESOURCEGROUPNAME -f name='RESOURCEGROUPNAME' -f value=${{ steps.deploy.outputs.ResourceGroupName }}
+        gh api --method PATCH  /repositories/${{vars.GH_REPO_ID}}/environments/${{ inputs.environment }}/variables/LOGICAPPPLAN_NAME -f name='LOGICAPPPLAN_NAME' -f value=${{ steps.deploy.outputs.LogicAppPlan_name }}
+        gh api --method PATCH  /repositories/${{vars.GH_REPO_ID}}/environments/${{ inputs.environment }}/variables/LOGICAPP_NAME -f name='LOGICAPP_NAME' -f value=${{ steps.deploy.outputs.LogicApp_name}}
       env:
         GH_TOKEN: ${{ secrets.GH_PAT }}  
