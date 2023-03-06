@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Logic Apps Standard Demo Ignores
 .debug/
+__azurite*
+__blobstorage__
+__queuestorage__

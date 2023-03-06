@@ -30,6 +30,12 @@ jobs:
                Get-AzResourceGroup
              azPSVersion: "latest"
 
+        - name: Test GH PAT Token
+          uses: actions/checkout@v2
+          with:
+            repository: ${{ github.event.repository.name }}
+            token: ${{ secrets.GH_PAT }}
+
   Linux-latest:
       runs-on: ubuntu-latest
       steps:
