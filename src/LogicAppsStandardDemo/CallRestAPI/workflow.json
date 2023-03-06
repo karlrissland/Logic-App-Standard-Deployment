@@ -1,10 +1,76 @@
 {
-  "definition": {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-    "actions": {},
-    "contentVersion": "1.0.0.0",
-    "outputs": {},
-    "triggers": {}
-  },
-  "kind": "Stateful"
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "HTTP_Call_toAPI_via_REST": {
+                "type": "Http",
+                "inputs": {
+                    "method": "GET",
+                    "uri": "@parameters('APIBaseURI')"
+                },
+                "runAfter": {}
+            },
+            "Was_API_Call_Successful": {
+                "type": "If",
+                "expression": {
+                    "and": [
+                        {
+                            "equals": [
+                                "@outputs('HTTP_Call_toAPI_via_REST')['statusCode']",
+                                200
+                            ]
+                        }
+                    ]
+                },
+                "actions": {
+                    "Response": {
+                        "type": "Response",
+                        "kind": "http",
+                        "inputs": {
+                            "statusCode": 200,
+                            "body": "@body('HTTP_Call_toAPI_via_REST')"
+                        },
+                        "runAfter": {}
+                    }
+                },
+                "runAfter": {
+                    "HTTP_Call_toAPI_via_REST": [
+                        "Succeeded"
+                    ]
+                },
+                "else": {
+                    "actions": {
+                        "Response_2": {
+                            "type": "Response",
+                            "kind": "http",
+                            "inputs": {
+                                "statusCode": 500,
+                                "body": "Chuck Norris has broken the internet!"
+                            },
+                            "runAfter": {}
+                        }
+                    }
+                }
+            }
+        },
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "category": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {}
+    },
+    "kind": "Stateful"
 }
