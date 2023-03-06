@@ -1,6 +1,6 @@
 {
-  "TestParam": {
+  "APIBaseURI": {
     "type": "String",
-    "value": "\"MyTestString\""
+    "value": "@appsetting('APIBaseURI')"
   }
 }
