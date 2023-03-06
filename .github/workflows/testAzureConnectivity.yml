@@ -32,8 +32,13 @@ jobs:
 
         - name: Test GH PAT Token
           uses: actions/checkout@v2
+          - id: repo-basename
+            run: |
+              echo "value=`basename ${{ github.repository }}`" >> $GITHUB_OUTPUT
+            shell: bash
           with:
-            repository: ${{ github.event.repository.name }}
+            #repository: ${{ github.event.repository.name }}
+            repository: ${{ github.repository }}
             token: ${{ secrets.GH_PAT }}
 
   Linux-latest:
