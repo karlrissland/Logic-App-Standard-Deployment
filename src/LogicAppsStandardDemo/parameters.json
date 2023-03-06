@@ -1,6 +1,6 @@
 {
-  "TestParam": {
+  "APIBaseURI": {
     "type": "String",
-    "value": "\"MyTestString\""
+    "value": "https://webhook.site/c57923f4-f729-49ec-b123-aab28ec21ad3"
   }
 }
