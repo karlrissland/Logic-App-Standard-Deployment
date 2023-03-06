@@ -29,6 +29,13 @@ jobs:
              inlineScript: |
                Get-AzResourceGroup
              azPSVersion: "latest"
+             
+        - name: 'Test GitHub Personal Access Token (PAT)'
+          uses: actions/checkout@v2
+          with:
+            repository: ${{ github.repository }}
+            token: ${{ secrets.GH_PAT }}        
+        
 
   Linux-latest:
       runs-on: ubuntu-latest
