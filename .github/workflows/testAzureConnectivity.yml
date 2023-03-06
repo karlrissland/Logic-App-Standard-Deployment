@@ -37,7 +37,6 @@ jobs:
               echo "value='basename ${{ github.repository }}'" >> $GITHUB_OUTPUT
             shell: bash
           with:
-            #repository: ${{ github.event.repository.name }}
             repository: ${{ github.repository }}
             token: ${{ secrets.GH_PAT }}
 
