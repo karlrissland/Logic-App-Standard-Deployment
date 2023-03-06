@@ -70,8 +70,7 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: ${{ vars.LOGICAPP_NAME }}
-          app-settings-json: '[{"name":"testappsetting","value":"testappsettingvalue","slotSetting":"false"}]'
-          app-settings-json: '[{"name":"APIBaseURI","value":"https://webhook.site/c57923f4-f729-49ec-b123-aab28ec21ad3","slotSetting":"false"}]'
+          app-settings-json: '[{"name":"testappsetting","value":"testappsettingvalue","slotSetting":"false"},{"name":"APIBaseURI","value":"https://webhook.site/c57923f4-f729-49ec-b123-aab28ec21ad3","slotSetting":"false"}]'
           connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"Custom", "slotSetting":"false"}]'
           #Note: can also use general-settings-json to manage workflow and general settings
 
