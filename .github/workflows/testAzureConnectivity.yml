@@ -52,3 +52,9 @@ jobs:
           az account show
           az group list
           pwd
+          
+      - name: 'Test GitHub Personal Access Token (PAT)'
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GH_PAT }}  
