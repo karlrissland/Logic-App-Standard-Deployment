@@ -3,10 +3,11 @@ name: Build and deploy application
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log Level'
+      environment:
+        type: environment
+        description: 'environment to run on'
         required: true
-        default: 'warning'
+        default: 'development'
         
   workflow_call:
     inputs:
