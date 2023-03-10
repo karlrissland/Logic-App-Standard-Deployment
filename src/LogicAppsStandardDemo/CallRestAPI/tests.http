@@ -1,0 +1,15 @@
+# Replace the URL of this test with what you get when you right-click on this workflow.json file -> Overview
+GET http://localhost:7072/api/CallRestAPI/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=91B2QekBSTfpLxbnPDT1Zq4kryNS7lhEHrd3csplz0w HTTP/1.1
+###
+
+#Backend site URLS based on deployment environment
+#dev
+GET https://webhook.site/c57923f4-f729-49ec-b123-aab28ec21ad3 HTTP/1.1
+###
+
+#test
+GET https://webhook.site/6777cdde-25a9-4f87-93d2-5c21db27e35d HTTP/1.1
+###
+
+#prod
+GET https://webhook.site/0ebbb055-2663-4412-ad73-d0e2fe08c6e7 HTTP/1.1
