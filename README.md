@@ -17,10 +17,15 @@ If you Fork the repo to use as a starting point for your own work, take a look a
 
 High level steps and documentation links to help you get your development environment up and running.
 
-## Azure Architecture
-The following diagram describes the general architecture of Azure services depicted in this solution.
+## Sample Workflows
 
-![Azure Architecture](docs/img/architecture-azure.drawio.svg)
+### Echo Request Workflow
+This is a very simple workflow that will simply echo back anything you post to it.  It is a good starting point to test your deployment.  Additional documentation can be found in the [EchoRequestWorkflow.md](docs/EchoRequestWorkflow.md) file.
+
+### Call Rest API Workflow
+Here we are calling an external Rest API and have parameterized the URI to demonstrate deploying to dev/test/prod environments.  There is some additional setup required to get this workflow working.  Additional documentation can be found in the [CallRestAPIWorkflow.md](docs/CallRestAPIWorkflow.md) file.
+
+
 
 ## Repository Structure
 The following diagram describes the structure of the repository.  Highlighting key files.

@@ -36,6 +36,7 @@ The script will prompt you for your GitHub Org/Owner name and the repository nam
     - LOGICAPP_NAME (populated by infra scripts)
     - RESOURCEGROUPNAME (populated by infra scripts)
     - WORKLOAD_ENVIRONMENT
+    - CALLRESTAPIURI (populated with fake data)
 
 ## Manual Steps
 
@@ -45,6 +46,7 @@ You can reference documentation found here; https://learn.microsoft.com/en-us/az
 <a href="img/sc-ServicePrincipleRbacAssignment.png"><img src="img/sc-ServicePrincipleRbacAssignment.png" width="300"></a>
 
 NOTE: This example assums you will be using one subscription and different resource groups for your environments.  If needed, a few small changes will enable this demo to work with multiple subscriptions, i.e. a subscription for dev/test and another for production.
+
 NOTE: At some point, I hope to automate this step as well.
 
 ### Setup a PAT for the GitHub CLI to use in workflows
