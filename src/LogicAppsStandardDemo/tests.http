@@ -1,0 +1,21 @@
+# Replace the URL of this test with what you get when you right-click on this workflow.json file -> Overview
+@CallRestApiUrl = http://localhost:7072/api/CallRestAPI/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gLIG9TuQv4Lf2KcUhLGlXhpYG8wUQG-4UgVrNYH4nKM
+@EchoRequestUrl = http://localhost:7072/api/EchoRequest/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DYllbVGIaYDPls8HAn0jCCnn2-j0QoooQojxPz6nJ98
+
+
+### EchoRequest Tests
+POST {{EchoRequestUrl}} HTTP/1.1
+content-type: application/json
+
+{
+    "Message":"Hello World!"
+}
+
+
+### CallRestAPI Tests
+POST {{CallRestApiUrl}} HTTP/1.1
+content-type: application/json
+
+{
+    "Message":"Hello World!"
+}

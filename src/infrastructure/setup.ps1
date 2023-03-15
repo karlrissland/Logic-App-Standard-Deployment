@@ -145,6 +145,7 @@ gh api --method POST  /repositories/$RepoID/environments/$DevEnvironmentName/var
 gh api --method POST  /repositories/$RepoID/environments/$DevEnvironmentName/variables -f name='LOGICAPP_NAME' -f value="tbd"            #Populated when infrastructure deployed
 gh api --method POST  /repositories/$RepoID/environments/$DevEnvironmentName/variables -f name='RESOURCEGROUPNAME' -f value="tbd"    #Populated when infrastructure deployed
 gh api --method POST  /repositories/$RepoID/environments/$DevEnvironmentName/variables -f name='WORKLOAD_ENVIRONMENT' -f value="$DevWorkloadEnvironment"
+gh api --method POST  /repositories/$RepoID/environments/$DevEnvironmentName/variables -f name='CallRestApiURI' -f value="https://<getyourown>.m.pipedream.net" #https://pipedream.com/
 Write-Output " - Created variables for $DevEnvironmentName"
 
 #Sets the Test environment variables
@@ -153,6 +154,7 @@ gh api --method POST  /repositories/$RepoID/environments/$TestEnvironmentName/va
 gh api --method POST  /repositories/$RepoID/environments/$TestEnvironmentName/variables -f name='LOGICAPP_NAME' -f value="tbd"            #Populated when infrastructure deployed
 gh api --method POST  /repositories/$RepoID/environments/$TestEnvironmentName/variables -f name='RESOURCEGROUPNAME' -f value="tbd"   #Populated when infrastructure deployed
 gh api --method POST  /repositories/$RepoID/environments/$TestEnvironmentName/variables -f name='WORKLOAD_ENVIRONMENT' -f value="$TestWorkloadEnvironment"
+gh api --method POST  /repositories/$RepoID/environments/$TestEnvironmentName/variables -f name='CallRestApiURI' -f value="https://<getyourown>.m.pipedream.net" #https://pipedream.com/
 Write-Output " - Created variables for $TestEnvironmentName"
 
 #Sets the Production environment variables
@@ -161,11 +163,19 @@ gh api --method POST  /repositories/$RepoID/environments/$ProdEnvironmentName/va
 gh api --method POST  /repositories/$RepoID/environments/$ProdEnvironmentName/variables -f name='LOGICAPP_NAME' -f value="tbd"           #Populated when infrastructure deployed
 gh api --method POST  /repositories/$RepoID/environments/$ProdEnvironmentName/variables -f name='RESOURCEGROUPNAME' -f value="tbd"   #Populated when infrastructure deployed
 gh api --method POST  /repositories/$RepoID/environments/$ProdEnvironmentName/variables -f name='WORKLOAD_ENVIRONMENT' -f value="$ProdWorkloadEnvironment"
+gh api --method POST  /repositories/$RepoID/environments/$ProdEnvironmentName/variables -f name='CallRestApiURI' -f value="https://<getyourown>.m.pipedream.net" #https://pipedream.com/
 Write-Output " - Created variables for $ProdEnvironmentName"
 
 Write-Output "GitHub Configured"
 
+Write-Output "TODOs: "
+Write-Output " - Go To https://pipedream.com to create one or more test endpoints.  Capture the URL(s) and "
+Write-Output "   update the CallRestApiURI variable in the Dev, Test and Prod environments."
+Write-Output
+Write-Output " - Grant the GitHub App Registration Contributor access to the subscription."
+Write-Output
+WRite-Output " - Create a GitHub PAT with the privilages as documented"
+Write-Output
 Write-Output "NOTE: RBAC not yet working for App Reg, manually grant it contributor on the subscription"
-Write-Output "NOTE: The GH_PAT Secret contents are invalid as it is imposible to create a PAT programatically."
-Write-Output "      Please follow the instructrions to create the PAT with the correct privilages and update "
-Write-Output "      the GH_PAT Secret"
+Write-Output "NOTE: At this time, it is imposible to create a PAT programatically nor can I grant the correct"
+Write-Output "      privilages to the default runner credentials."

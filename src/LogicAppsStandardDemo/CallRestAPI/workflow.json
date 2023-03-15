@@ -6,7 +6,7 @@
                 "type": "Http",
                 "inputs": {
                     "method": "GET",
-                    "uri": "@parameters('APIBaseURI')"
+                    "uri": "@parameters('CallRestApiURI')"
                 },
                 "runAfter": {}
             },
@@ -61,7 +61,7 @@
                     "schema": {
                         "type": "object",
                         "properties": {
-                            "category": {
+                            "Message": {
                                 "type": "string"
                             }
                         }

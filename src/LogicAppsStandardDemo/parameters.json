@@ -1,6 +1,6 @@
 {
-  "APIBaseURI": {
+  "CallRestApiURI": {
     "type": "String",
-    "value": "@appsetting('APIBaseURI')"
+    "value": "@appsetting('CallRestApiURI')"
   }
 }
