@@ -40,15 +40,6 @@ The script will prompt you for your GitHub Org/Owner name and the repository nam
 
 ## Manual Steps
 
-### Assign RBAC to your app registration
-You can reference documentation found here; https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-the-application-to-a-role.  Basically, we need to give contributor access to the azure resources you are targeting with deployments.  In the screenshot below I am giving the app registration contributor access to the subscription.
-
-<a href="img/sc-ServicePrincipleRbacAssignment.png"><img src="img/sc-ServicePrincipleRbacAssignment.png" width="300"></a>
-
-NOTE: This example assums you will be using one subscription and different resource groups for your environments.  If needed, a few small changes will enable this demo to work with multiple subscriptions, i.e. a subscription for dev/test and another for production.
-
-NOTE: At some point, I hope to automate this step as well.
-
 ### Setup a PAT for the GitHub CLI to use in workflows
 In one of the GitHub Workflows we need to use the GitHub CLI to update the variables within the environment.  There is no function in GitHub workflows to do this so we needed to use the CLI to help us call the GitHub rest api.  The default permissions that the GitHub runner uses isn't sufficient for this and there is no way to add those permissions.  Hence, we need to create a PAT and specifically add the permissions we need.
 

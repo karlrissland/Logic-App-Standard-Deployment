@@ -24,14 +24,13 @@
 # Parameters
 
 #parameters to be updated to match local environment
-$OrgOwner = Read-Host "Please enter your github org name or owner name: "
-$RepoName = Read-Host "Please enter the name of your github repository: "
-$AppRegistrationName = "GitHubActions-FederationCred"
+$OrgOwner = Read-Host "Please enter your github org name or owner name "
+$RepoName = Read-Host "Please enter the name of your github repository "
+$AppRegistrationName = Read-Host "Please enter the name of your Azure App Registration "
 $AzureRegion = "eastus"
 
 #Need PSSodium for secret encryption
 Install-MOdule -Name PSSodium
-
 
 # Changing the following variables will require changes to other scripts
 # specifically, the deploymentscript.ps1 file and the github workflow.yml files
@@ -49,10 +48,18 @@ Write-Output "Configuring Azure"
 
 #Link to creating an AD App Registration
 # https://learn.microsoft.com/en-us/cli/azure/ad/app?view=azure-cli-latest#az-ad-app-create
-$AzureClientId = (az ad app create --display-name $AppRegistrationName | ConvertFrom-Json).appId  #Need to add contributor access to the subscription
+# https://learn.microsoft.com/en-us/azure/healthcare-apis/register-application-cli-rest#create-a-service-principal
 $AzureAccountInfoObj = az account show | ConvertFrom-Json
 $AzureSubscriptionId = $AzureAccountInfoObj.id
 $AzureTenantId = $AzureAccountInfoObj.homeTenantId
+
+### Define app registration name, etc.
+$AzureClientId=az ad app create --display-name $AppRegistrationName --query appId --output tsv
+$AzureObjectId=az ad app show --id $AzureClientId --query objectId --output tsv
+
+###Create an AAD service principal
+$ServicePrincipleId=az ad sp create --id $AzureClientId --query objectId --output tsv
+
 Write-Output $AzureAccountInfoObj
 Write-Output "ClientId: $AzureClientId"
 WRite-Output "SubscriptionId: $AzureSubscriptionId"
@@ -89,6 +96,7 @@ $fedCred = $fedCred + "'issuer':'https://token.actions.githubusercontent.com','n
 $fedCred = $fedCred + "'subject':'repo:" +$OrgOwner+ "/" + $RepoName + "::ref:refs/heads/main'}"
 az ad app federated-credential create --id $AzureClientId --parameters $fedCred
 Write-Output " - Added Federated Credential for repo"
+
 Write-Output "Azure Configured"
 Write-Output ""
 
@@ -111,21 +119,17 @@ $GitHubKey = $RepoPubKeyObj.Key
 #Need to encrypt values
 
 $EncryptedValue = ConvertTo-SodiumEncryptedString -Text $AzureClientId -PublicKey $GitHubKey
-gh api --method PUT /repos/karlrissland/test/actions/secrets/AZURE_CLIENT_ID -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
+gh api --method PUT /repos/$OrgOwner/$RepoName/actions/secrets/AZURE_CLIENT_ID -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
 
 $EncryptedValue = ConvertTo-SodiumEncryptedString -Text $AzureSubscriptionId -PublicKey $GitHubKey
-gh api --method PUT /repos/karlrissland/test/actions/secrets/AZURE_SUBSCRIPTION_ID -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
+gh api --method PUT /repos/$OrgOwner/$RepoName/actions/secrets/AZURE_SUBSCRIPTION_ID -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
 
 $EncryptedValue = ConvertTo-SodiumEncryptedString -Text $AzureTenantId -PublicKey $GitHubKey
-gh api --method PUT /repos/karlrissland/test/actions/secrets/AZURE_TENANT_ID  -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
+gh api --method PUT /repos/$OrgOwner/$RepoName/actions/secrets/AZURE_TENANT_ID  -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
 
 $EncryptedValue = ConvertTo-SodiumEncryptedString -Text "<ManuallyUpdateWithPAT>" -PublicKey $GitHubKey
-gh api --method PUT /repos/karlrissland/test/actions/secrets/GH_PAT -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
-
-#gh secret set AZURE_CLIENT_ID --body "$AzureClientId" --repos $RepoName --org $OrgOwner --app actions  
-#gh secret set AZURE_SUBSCRIPTION_ID --body "$AzureSubscriptionId" --repos $RepoName --org $OrgOwner --app actions  
-#gh secret set AZURE_TENANT_ID --body "$AzureTenantId" --repos $RepoName --org $OrgOwner --app actions  
-#gh secret set GH_PAT --body "<ManuallyUpdateWithPAT>" --repos $RepoName --org $OrgOwner --app actions  #Use the GitHub GUI to create the PAT and then update the secret            
+gh api --method PUT /repos/$OrgOwner/$RepoName/actions/secrets/GH_PAT -f encrypted_value="$EncryptedValue" -f key_id="$GitHubKeyId"
+         
 Write-Output " - Configured Action Secrets"
 
 
@@ -171,11 +175,8 @@ Write-Output "GitHub Configured"
 Write-Output "TODOs: "
 Write-Output " - Go To https://pipedream.com to create one or more test endpoints.  Capture the URL(s) and "
 Write-Output "   update the CallRestApiURI variable in the Dev, Test and Prod environments."
-Write-Output
-Write-Output " - Grant the GitHub App Registration Contributor access to the subscription."
-Write-Output
+Write-Output ""
 WRite-Output " - Create a GitHub PAT with the privilages as documented"
-Write-Output
-Write-Output "NOTE: RBAC not yet working for App Reg, manually grant it contributor on the subscription"
+Write-Output ""
 Write-Output "NOTE: At this time, it is imposible to create a PAT programatically nor can I grant the correct"
 Write-Output "      privilages to the default runner credentials."
